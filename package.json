@@ -1,0 +1,23 @@
+{
+  "name": "fftjs-supplements",
+  "version": "1.0.0",
+  "description": "Some supplement functions for fft.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LiChuan172/fftjs-supplements.git"
+  },
+  "keywords": [
+    "fftjs",
+    "supplements"
+  ],
+  "author": "LI Chuan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LiChuan172/fftjs-supplements/issues"
+  },
+  "homepage": "https://github.com/LiChuan172/fftjs-supplements#readme"
+}
