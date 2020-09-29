@@ -37,7 +37,7 @@ export function toDFT(resultFFT) {
         )
   )
 
-  return getComplex(realsDFT, imaginarysDFT)
+  return getComplexes(realsDFT, imaginarysDFT)
 }
 
 export function toAmplitudeSpectrum(resultDFT) {
