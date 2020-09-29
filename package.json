@@ -14,10 +14,14 @@
     "fftjs",
     "supplements"
   ],
+  "type": "module",
   "author": "LI Chuan",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/LiChuan172/fftjs-supplements/issues"
   },
-  "homepage": "https://github.com/LiChuan172/fftjs-supplements#readme"
+  "homepage": "https://github.com/LiChuan172/fftjs-supplements#readme",
+  "dependencies": {
+    "ramda": "^0.27.1"
+  }
 }
