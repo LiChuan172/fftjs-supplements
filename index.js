@@ -9,7 +9,7 @@ export function getImaginarys(complex) {
   return complex.filter((_, index) => index % 2 === 1)
 }
 
-export function getComplex(reals, imaginarys) {
+export function getComplexes(reals, imaginarys) {
   return Array(reals.length * 2)
     .fill(0)
     .map((_, index) =>
