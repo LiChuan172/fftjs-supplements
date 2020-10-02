@@ -1,5 +1,5 @@
 import { zip } from "ramda"
-const { sqrt, floor } = Math
+const { sqrt, floor, log2, ceil } = Math
 
 export function getReals(complex) {
   return complex.filter((_, index) => index % 2 === 0)
@@ -23,6 +23,7 @@ export function absComplex(real, imaginary) {
   return sqrt(real * real + imaginary * imaginary)
 }
 
+// translate FFT to DFT
 export function toDFT(resultFFT) {
   const reals = getReals(resultFFT)
   const imaginarys = getImaginarys(resultFFT)
@@ -72,4 +73,18 @@ export function throughBandPass(resultFFT, fs, f1, f2) {
     const f = floor(index / 2) * resolution
     return f >= f1 && f <= f2 ? value : 0
   })
+}
+
+// cut the length, for example, from 1088 to 1024
+export function cutSample(sample) {
+  const len = sample.length
+  const lenCut = 2 ** floor(log2(len))
+  return sample.slice(0, lenCut)
+}
+
+// expand the length, for example, from 1088 to 2048
+export function expandSample(sample) {
+  const len = sample.length
+  const lenExpand = 2 ** ceil(log2(len))
+  return sample.concat(Array(lenExpand - len).fill(0))
 }
