@@ -1,7 +1,7 @@
-import ramda from "ramda"
+import { zip } from "ramda"
 import FFT from "fft.js"
 const { sqrt, floor, log2, ceil } = Math
-const { zip } = ramda
+// const { zip } = ramda
 
 export function getReals(complex) {
   return complex.filter((_, index) => index % 2 === 0)
