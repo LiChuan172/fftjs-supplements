@@ -1,5 +1,7 @@
-import { zip } from "ramda"
+import ramda from "ramda"
+import FFT from "fft.js"
 const { sqrt, floor, log2, ceil } = Math
+const { zip } = ramda
 
 export function getReals(complex) {
   return complex.filter((_, index) => index % 2 === 0)
@@ -87,4 +89,40 @@ export function expandSample(sample) {
   const len = sample.length
   const lenExpand = 2 ** ceil(log2(len))
   return sample.concat(Array(lenExpand - len).fill(0))
+}
+
+// sample through bandpass
+// sample: original sample,
+// fs: sampling frequency,
+// f1: min value of the pass,
+// f2: max vaule of the pass
+export function sampleThroughBandpass(sample, fs, f1, f2) {
+  // cut sample down
+  const sampleCut = cutSample(sample)
+
+  // get a fft instance
+  const n = sampleCut.length
+  const f = new FFT(n)
+  
+  // get a complex sample
+  const sampleCutComplex = f.createComplexArray()
+  f.toComplexArray(sampleCut, sampleCutComplex)
+  
+  // get fft result: resFft
+  const resFft = f.createComplexArray()
+  f.transform(resFft, sampleCutComplex)
+
+  // fft result through bandpass
+  const resThroughBandPass = throughBandPass(resFft, fs, f1, f2)
+  f.completeSpectrum(resThroughBandPass)
+
+  // inverse fft
+  const sampleComplex = f.createComplexArray()
+  f.inverseTransform(sampleComplex, resThroughBandPass)
+
+  // get the real part of the complex sample
+  const sampleReal = Array(n).fill(0)
+  f.fromComplexArray(sampleComplex, sampleReal)
+
+  return sampleReal
 }
