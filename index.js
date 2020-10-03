@@ -25,7 +25,7 @@ export function absComplex(real, imaginary) {
   return sqrt(real * real + imaginary * imaginary)
 }
 
-// translate FFT to DFT
+// translate FFT to DFT, the length of DFT will be the half of the FFT
 export function toDFT(resultFFT) {
   const reals = getReals(resultFFT)
   const imaginarys = getImaginarys(resultFFT)
@@ -110,7 +110,7 @@ export function getResFft(sample) {
   const resFft = f.createComplexArray()
   f.transform(resFft, sampleCutComplex)
 
-  return resFft
+  return { resFft, f }
 }
 
 // sample through bandpass
@@ -120,7 +120,7 @@ export function getResFft(sample) {
 // f2: max vaule of the pass
 export function sampleThroughBandpass(sample, fs, f1, f2) {
   // cut sample and get fft result
-  const resFft = getResFft(sample)
+  const { resFft, f } = getResFft(sample)
 
   // fft result through bandpass
   const resThroughBandPass = throughBandPass(resFft, fs, f1, f2)
@@ -139,11 +139,13 @@ export function sampleThroughBandpass(sample, fs, f1, f2) {
 
 export function amplitudeSpectrum(sample) {
   // cut sample and get fft result
-  const resFft = getResFft(sample)
+  const { resFft } = getResFft(sample)
 
   // translate FFT to DFT
   const resDFT = toDFT(resFft)
 
   // translate DFT to Amplitude Spectrum
   const AS = toAmplitudeSpectrum(resDFT)
+
+  return AS
 }

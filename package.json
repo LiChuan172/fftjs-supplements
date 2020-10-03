@@ -1,6 +1,6 @@
 {
   "name": "fftjs-supplements",
-  "version": "1.3.3",
+  "version": "1.3.4",
   "description": "Some supplement functions for fft.js",
   "main": "index.js",
   "scripts": {
