@@ -149,3 +149,18 @@ export function amplitudeSpectrum(sample) {
 
   return AS
 }
+
+export function ASThroughBandpass(sample, fs, f1, f2) {
+  // cut sample and get fft result
+  const { resFft } = getResFft(sample)
+
+  const resFftTP = throughBandPass(resFft, fs, f1, f2)
+
+  // translate FFT to DFT
+  const resDFT = toDFT(resFftTP)
+
+  // translate DFT to Amplitude Spectrum
+  const AS = toAmplitudeSpectrum(resDFT)
+
+  return AS
+}
