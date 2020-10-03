@@ -110,7 +110,7 @@ export function getResFft(sample) {
   const resFft = f.createComplexArray()
   f.transform(resFft, sampleCutComplex)
 
-  return { resFft, f }
+  return { resFft, f, n }
 }
 
 // sample through bandpass
@@ -120,7 +120,7 @@ export function getResFft(sample) {
 // f2: max vaule of the pass
 export function sampleThroughBandpass(sample, fs, f1, f2) {
   // cut sample and get fft result
-  const { resFft, f } = getResFft(sample)
+  const { resFft, f, n } = getResFft(sample)
 
   // fft result through bandpass
   const resThroughBandPass = throughBandPass(resFft, fs, f1, f2)
