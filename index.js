@@ -71,7 +71,7 @@ export function orderSpectrum(resultFS, fb) {
 
 export function throughBandPass(resultFFT, fs, f1, f2) {
   const N = resultFFT.length / 2
-  const resolution = N / fs
+  const resolution =  fs / N
   return resultFFT.map((value, index) => {
     const f = floor(index / 2) * resolution
     return f >= f1 && f <= f2 ? value : 0
