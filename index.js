@@ -1,4 +1,5 @@
-import { zip } from "ramda"
+import pkg from "ramda"
+const {zip} = pkg
 import FFT from "fft.js"
 const { sqrt, floor, log2, ceil } = Math
 // const { zip } = ramda
